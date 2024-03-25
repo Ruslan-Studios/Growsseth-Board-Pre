@@ -2,12 +2,20 @@
 
 ## Initialize the project
 
-Install rust
+### Install Node
+
+https://nodejs.org/en
+
+### Install Rust
+
 https://www.rust-lang.org/tools/install
 
-Open the project and write in the terminal (root folder):
+### Run the project
+
+Open the project folder in your terminal and then write
 `npm run tauri dev`
 
+---
 
 
 ## Copyright
