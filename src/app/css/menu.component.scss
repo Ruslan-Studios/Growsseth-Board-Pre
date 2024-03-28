@@ -1,0 +1,57 @@
+.container {
+    color: white;
+    font-weight: lighter;
+
+    display: flex;
+    flex-direction: column;
+
+    width: 100%;
+    letter-spacing: 2px;
+
+    nav {
+        display: flex;
+        width: 100%;
+        height: 56px;
+        background-color: #A5682C;
+        align-items: center;
+        
+        font-size: 15px;
+
+
+        .btn-nav {
+            width: 160px;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: .1s ease;
+        }
+
+        .btn-nav:hover {
+            background-color: #925c25;
+        }
+
+        .btn-selected {
+            background-color: #BB8045 !important;
+        }
+    }
+
+    .undernav, .footer {
+        width: 100%;
+        height: 20px;
+        background-color: #38788F;
+    }
+
+    .footer {
+        position: absolute;
+        bottom: 0;
+
+        text-align: end;
+        
+        p {
+            color: rgba(255, 255, 255, 0.5);
+
+            margin-right: 20px;
+        }
+    }
+}
