@@ -36,3 +36,4 @@ The game has been developed by the following individuals as indicated in the tab
 | Eribell | Artist |
 | SkennyArt | Artist |
 | Horvat9 | Artist |
+| Golden Dragonflies | Artist |
