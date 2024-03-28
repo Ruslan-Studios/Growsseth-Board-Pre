@@ -6,7 +6,7 @@
     "distDir": "../dist/growsseth-board/browser"
   },
   "package": {
-    "productName": "growsseth-board",
+    "productName": "Growsseth Board",
     "version": "0.0.1"
   },
   "tauri": {
@@ -30,7 +30,7 @@
     "bundle": {
       "active": true,
       "targets": "all",
-      "identifier": "com.ruslanstudios.dev",
+      "identifier": "com.ruslanstudios",
       "icon": [
         "icons/32x32.png",
         "icons/128x128.png",
