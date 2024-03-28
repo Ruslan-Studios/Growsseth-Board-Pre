@@ -33,5 +33,6 @@ The game has been developed by the following individuals as indicated in the tab
 | NoelEm | Developer |
 | SiriosDev | Developer |
 | UomoProtone | Developer |
-| .... | Artist |
-
+| Eribell | Artist |
+| SkennyArt | Artist |
+| Horvat9 | Artist |
