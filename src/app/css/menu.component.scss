@@ -1,4 +1,5 @@
-.container {
+.container
+{
     color: white;
     font-weight: lighter;
 
@@ -8,7 +9,8 @@
     width: 100%;
     letter-spacing: 2px;
 
-    nav {
+    nav
+    {
         display: flex;
         width: 100%;
         height: 56px;
@@ -18,7 +20,8 @@
         font-size: 15px;
 
 
-        .btn-nav {
+        .btn-nav
+        {
             width: 160px;
             height: 100%;
             display: flex;
@@ -27,23 +30,27 @@
             transition: .1s ease;
         }
 
-        .btn-nav:hover {
+        .btn-nav:hover
+        {
             background-color: #925c25;
         }
 
-        .btn-selected {
+        .btn-selected
+        {
             background-color: #BB8045 !important;
         }
     }
 
-    .mainpage {
+    .mainpage
+    {
         margin-left: -1px;
         position: absolute;
         width: 100%;
         height: 1024px;
         z-index: -3;
-    
-        .menu-bg {
+
+        .menu-bg
+        {
             position: absolute;
             width: calc(100% + 3px);
             height: 1024px;
@@ -52,7 +59,8 @@
             z-index: -2;
         }
     
-        .selection-menu {
+        .selection-menu
+        {
             position: absolute;
             width: 100%;
             right: 0;
@@ -62,7 +70,8 @@
             justify-content: end;
             align-items: center;
     
-            .rotated-panel {
+            .rotated-panel
+            {
                 transform: rotateZ(15deg);
                 width: 60%;
                 height: 2048px;
@@ -74,13 +83,15 @@
             }
         }
 
-        .text-panel {
+        .text-panel
+        {
             position: absolute;
             width: 47.5%;
             right: 0;
             z-index: -1;
 
-            .game-name {
+            .game-name
+            {
                 text-align: center;
                 color: #555353;
                 margin-top: 220px;
@@ -89,7 +100,8 @@
                 font-weight: bold;
             }
 
-            .btns {
+            .btns
+            {
                 text-align: center;
                 color: #555353;
                 margin-top: 80px;
@@ -97,25 +109,29 @@
                 font-size: 28px;
             }
 
-            .f-btn {
+            .f-btn
+            {
                 margin-top: 180px;
             }
         }
     }
 
-    .undernav, .footer {
+    .undernav, .footer
+    {
         width: 100%;
         height: 20px;
         background-color: #38788F;
     }
 
-    .footer {
+    .footer
+    {
         position: absolute;
         bottom: 0;
 
         text-align: end;
         
-        p {
+        p
+        {
             color: rgba(255, 255, 255, 0.5);
 
             margin-right: 20px;

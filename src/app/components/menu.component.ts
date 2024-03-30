@@ -3,15 +3,19 @@ import { CommonModule } from '@angular/common';
 import { RouterOutlet, Router } from '@angular/router';
 import { app } from '@tauri-apps/api';
 
-@Component({
-  selector: 'app-root',
-  standalone: true,
-  imports: [CommonModule, RouterOutlet],
-  templateUrl: './../html/menu.component.html',
-  styleUrl: './../css/menu.component.scss'
-})
+@Component
+(
+  {
+    selector: 'app-root',
+    standalone: true,
+    imports: [CommonModule, RouterOutlet],
+    templateUrl: './../html/menu.component.html',
+    styleUrl: './../css/menu.component.scss'
+  }
+)
 
-export class MenuComponent implements OnInit {
+export class MenuComponent implements OnInit
+{
 
   constructor(private router: Router) {
 
@@ -23,15 +27,19 @@ export class MenuComponent implements OnInit {
 
   gameVersion: string = '';
 
-  ngOnInit() {
+  ngOnInit()
+  {
     this.getVersion();
   }
 
-  async getVersion() {
-    try {
+  async getVersion()
+  {
+    try
+    {
       const version = await app.getVersion();
       this.gameVersion = version;
-    } catch (error) {
+    } catch (error)
+    {
       console.error('Error getting app version:', error);
     }
   }
