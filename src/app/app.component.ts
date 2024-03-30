@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { invoke } from "@tauri-apps/api/tauri";
@@ -11,5 +11,8 @@ import { invoke } from "@tauri-apps/api/tauri";
 })
 
 export class AppComponent {
-  
+  @HostListener('window:contextmenu', ['$event'])
+  onRightClick(event: MouseEvent) {
+    event.preventDefault(); // Prevent the browser's default context menu
+  }
 }
