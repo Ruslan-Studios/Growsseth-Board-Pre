@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterOutlet } from '@angular/router';
-import { invoke } from "@tauri-apps/api/tauri";
+import { RouterOutlet, Router } from '@angular/router';
 import { app } from '@tauri-apps/api';
 
 @Component
@@ -17,6 +16,14 @@ import { app } from '@tauri-apps/api';
 
 export class MenuComponent implements OnInit
 {
+
+  constructor(private router: Router) {
+
+  }
+
+  toCreateGame() {
+    this.router.navigate(['game']);
+  }
 
   gameVersion: string = '';
 
