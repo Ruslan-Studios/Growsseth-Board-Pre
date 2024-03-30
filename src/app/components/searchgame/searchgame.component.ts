@@ -9,10 +9,9 @@ import { Router } from '@angular/router';
   selector: 'app-root',
   standalone: true,
   imports: [CommonModule, RouterOutlet],
-  templateUrl: './../html/game.component.html',
-  styleUrl: './../css/menu.component.scss'
+  templateUrl: './searchgame.component.html'
 })
 
-export class GameComponent {
+export class SearchGameComponent {
     
 }

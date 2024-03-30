@@ -1,0 +1,18 @@
+.footer
+{
+    width: 100%;
+    height: 20px;
+    background-color: #38788F;
+
+    position: absolute;
+    bottom: 0;
+
+    text-align: end;
+    
+    p
+    {
+        color: rgba(255, 255, 255, 0.5);
+
+        margin-right: 20px;
+    }
+}

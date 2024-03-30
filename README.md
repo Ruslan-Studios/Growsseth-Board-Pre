@@ -12,7 +12,10 @@ https://www.rust-lang.org/tools/install
 
 ### Run the project
 
-Open the project folder in your terminal and then write
+Run a terminal with the path of the project, then:
+`npm install`
+
+after it finishes installing every dependency execute:
 `npm run tauri dev`
 
 ---

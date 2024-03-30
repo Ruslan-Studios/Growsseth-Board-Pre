@@ -1,6 +1,6 @@
 import { bootstrapApplication, provideProtractorTestingSupport } from "@angular/platform-browser";
 import { appConfig } from "./app/app.config";
-import { MenuComponent } from "./app/components/menu.component";
+import { MenuComponent } from "./app/components/menu/menu.component";
 import { provideRouter } from "@angular/router";
 import { routes } from "./app/app.routes";
 import { AppComponent } from "./app/app.component";
