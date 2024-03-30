@@ -7,8 +7,7 @@ import { invoke } from "@tauri-apps/api/tauri";
   selector: 'app-root',
   standalone: true,
   imports: [CommonModule, RouterOutlet],
-  templateUrl: './html/menu.component.html',
-  styleUrl: './css/menu.component.scss'
+  templateUrl: './app.component.html'
 })
 
 export class AppComponent {
