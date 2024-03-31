@@ -79,8 +79,20 @@
                 text-align: center;
                 color: #555353;
                 margin-top: 80px;
+                
+                background-color: #00000000;
+                border: none;
+                border-bottom-width: 2px !important;
+                border-bottom: solid;
+                border-bottom-color: #00000000;
 
                 font-size: 28px;
+            }
+
+            .btns:hover{
+                // background-color: #00000080;
+                border-bottom-color: #00000080;
+                
             }
 
             .f-btn
