@@ -6,16 +6,31 @@
             <p>Options</p>
             <p>Graphics</p>
 
-            <select name="resolutionSelect" id="resolutionSelect">
-                <option disabled selected>Resolution:</option>
-                <option *ngFor="let resolution of standardResolutions" [value]="resolution.join('x')">
-                    {{ resolution[0] }}x{{ resolution[1] }}
-                </option>
-            </select>            
+            <div class="resolutionSelection">
+                <select name="resolutionSelect" id="resolutionSelect" (change)="onNewResSelected($event)">
+                    <option disabled selected>Resolution: {{standardResolutions[0][0]}}x{{standardResolutions[0][1]}}</option>
+                    <option *ngFor="let resolution of standardResolutions" [value]="resolution.join('x')">
+                        {{ resolution[0] }}x{{ resolution[1] }}
+                    </option>
+                </select>
+            </div>
+            
+            <button>Fullscreen: Off</button>
+
+            <div>
+                <button>VSync: Off</button>
+
+                <input type="range" min="30" max="256" value="60" class="slider">
+            </div>
+
+            <button>Card Effects: High</button>
               
         </div>
         <div class="right-page">
             <p>Sounds</p>
+            <input type="range" min="0" max="100" value="100" class="slider">
+            <input type="range" min="0" max="100" value="100" class="slider">
+            <input type="range" min="0" max="100" value="100" class="slider">
         </div>
     </div>
     <app-menu-footer></app-menu-footer>

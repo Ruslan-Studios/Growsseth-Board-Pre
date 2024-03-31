@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet, Router } from '@angular/router';
 import { app } from '@tauri-apps/api';
@@ -28,6 +28,14 @@ export class OptionsComponent
     [1080, 768],
     [720, 512]
   ]
+
+  onNewResSelected(event: Event) {
+    const selectedValue = (event.target as HTMLSelectElement).value;
+    const selectedElement = event.target as HTMLSelectElement;
+    selectedElement.options[0].text = "Resolution: " + selectedValue;
+    selectedElement.options[0].selected = true;
+    console.log('Selected option:', selectedValue);
+}
 
   constructor(private router: Router) {
 
