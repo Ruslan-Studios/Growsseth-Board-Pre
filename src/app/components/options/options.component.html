@@ -1,3 +1,22 @@
 <div class="container">
     <app-menu-nav></app-menu-nav>
+    <div class="undernav"></div>
+    <div class="options-container">
+        <div class="left-page">
+            <p>Options</p>
+            <p>Graphics</p>
+
+            <select name="resolutionSelect" id="resolutionSelect">
+                <option disabled selected>Resolution:</option>
+                <option *ngFor="let resolution of standardResolutions" [value]="resolution.join('x')">
+                    {{ resolution[0] }}x{{ resolution[1] }}
+                </option>
+            </select>            
+              
+        </div>
+        <div class="right-page">
+            <p>Sounds</p>
+        </div>
+    </div>
+    <app-menu-footer></app-menu-footer>
 </div>

@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterOutlet, Router } from '@angular/router';
 import { app } from '@tauri-apps/api';
 import { MenuNavComponent } from '../templates/menu-nav/menunav.component';
+import { MenuFooterComponent } from '../templates/menu-footer/menufooter.component';
 
 @Component({
   selector: 'app-root',
@@ -11,7 +12,8 @@ import { MenuNavComponent } from '../templates/menu-nav/menunav.component';
   imports: [
     CommonModule, 
     RouterOutlet, 
-    MenuNavComponent
+    MenuNavComponent,
+    MenuFooterComponent
   ],
 
   templateUrl: './options.component.html',
@@ -20,6 +22,12 @@ import { MenuNavComponent } from '../templates/menu-nav/menunav.component';
 
 export class OptionsComponent
 {
+
+  standardResolutions: number[][] = [
+    [1440, 1024],
+    [1080, 768],
+    [720, 512]
+  ]
 
   constructor(private router: Router) {
 

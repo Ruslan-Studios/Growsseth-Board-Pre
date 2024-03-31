@@ -12,6 +12,20 @@ import { exit } from '@tauri-apps/api/process';
 })
 export class MenuNavComponent implements OnInit {
 
+  whichRoute(): number {
+
+    if(this.router.url == "/")
+    {
+      return 0;
+    }
+    else if(this.router.url == "/options")
+    {
+      return 1;
+    }
+
+    return -1;
+  }
+
   constructor(private router: Router) {
 
   }

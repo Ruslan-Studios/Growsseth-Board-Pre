@@ -1,0 +1,22 @@
+.undernav
+{
+    width: 100%;
+    height: 20px;
+    background-color: #38788F;
+}
+
+.options-container {
+    display: flex;
+
+    height: calc(1024px - 93.6px);
+
+    .left-page {
+        width: 50%;
+        background-color: #fef8ec;
+    }
+
+    .right-page {
+        width: 50%;
+        background-color: #fef8ec;
+    }
+}

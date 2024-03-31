@@ -1,8 +1,8 @@
 <nav>
-    <div class="btn-nav btn-selected">
+    <div [ngClass]="{'btn-selected' : whichRoute() == 0}" class="btn-nav">
         <button (click)="toMenu()">Home</button>
     </div>
-    <div class="btn-nav">
+    <div [ngClass]="{'btn-selected' : whichRoute() == 1}" class="btn-nav">
         <button (click)="toOptions()">Options</button>
     </div>
     <div class="btn-nav">
