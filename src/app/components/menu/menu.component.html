@@ -6,11 +6,24 @@
             </div>
         </div>
         <div class="text-panel">
-            <p class="game-name">Growsseth Board</p>
+            <p class="game-name">Growsseth:<br>The Board Game</p>
             <div class="btn-list">
-                <button class="btns f-btn" (click)="toCreateGame()">CREATE GAME</button>
-                <button class="btns" (click)="toSearch()">SEARCH GAME</button>
-                <button class="btns" (click)="toRandom()">JOIN RANDOM</button>
+                <div class="btns f-btn">
+                    <button (click)="toCreateGame()">CREATE GAME</button>
+                    <div class="flexer">
+                        <div class="selected"></div><img src="../../../assets/test.png" alt=""><div class="selected"></div>
+                    </div>
+                </div>
+                <div class="btns"><button (click)="toSearch()">SEARCH GAME</button>
+                    <div class="flexer">
+                        <div class="selected"></div><img src="../../../assets/test.png" alt=""><div class="selected"></div>
+                    </div>
+                </div>
+                <div class="btns"><button (click)="toRandom()">JOIN RANDOM</button>
+                    <div class="flexer">
+                        <div class="selected"></div><img src="../../../assets/test.png" alt=""><div class="selected"></div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

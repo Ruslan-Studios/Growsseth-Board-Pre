@@ -76,28 +76,47 @@
 
             .btns
             {
-                text-align: center;
-                color: #555353;
                 margin-top: 80px;
-                
-                background-color: #00000000;
                 border: none;
                 border-bottom-width: 2px !important;
                 border-bottom: solid;
                 border-bottom-color: #00000000;
-
-                font-size: 28px;
-            }
-
-            .btns:hover{
-                // background-color: #00000080;
-                border-bottom-color: #00000080;
+                .flexer{
+                    height: 50px;
+                    display: flex;
+                    div{
+                        width: 40%;
+                        height: 2px;
+                        align-self: center;
+                        background-color: #00000080;
+                    }
+                img{
+                    height: 100%;
+                }
+                }
+                button{
+                    border: none;
+                    text-align: center;
+                    color: #555353;
+                    //
+                    background-color: #00000000;
+                    //
+                    font-size: 28px;
+                }
                 
+                .selected{
+                    visibility: hidden;
+                }
+                &:hover{
+                    .selected{
+                        visibility: visible;
+                    }
+                }
             }
 
             .f-btn
             {
-                margin-top: 180px;
+                margin-top: 100px;
             }
         }
     }
