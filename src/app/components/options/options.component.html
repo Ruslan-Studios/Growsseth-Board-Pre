@@ -8,7 +8,7 @@
 
             <div class="resolutionSelection">
                 <select name="resolutionSelect" id="resolutionSelect" (change)="onNewResSelected($event)">
-                    <option disabled selected>Resolution: {{standardResolutions[0][0]}}x{{standardResolutions[0][1]}}</option>
+                    <option disabled selected>Resolution: {{standardResolutions[2][0]}}x{{standardResolutions[2][1]}}</option>
                     <option *ngFor="let resolution of standardResolutions" [value]="resolution.join('x')">
                         {{ resolution[0] }}x{{ resolution[1] }}
                     </option>
