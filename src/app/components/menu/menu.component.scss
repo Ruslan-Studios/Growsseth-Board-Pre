@@ -74,14 +74,17 @@
                     height: 50px;
                     display: flex;
 
-                    justify-content: center;
+                    justify-content: space-between;
+                    align-items: center;
 
                     img {
-                        height: 3.125rem;
-                        min-height: 3.125rem;
-                        width: 3.125rem;
-                        min-width: 3.125rem;
+                        height: 2.125rem;
+                        min-height: 2.125rem;
+                        width: 2.125rem;
+                        min-width: 2.125rem;
+                        filter: opacity(0.75);
                     }
+
 
                 }
                 button {
@@ -98,7 +101,9 @@
                     align-self: center;
                     background-color: #000000f3;
                     filter: opacity(0);
-                    transition: .5s ease;
+                    transition: .3s ease;
+                    margin-left: 10px;
+                    margin-right: 10px;
                 }
                 
                 &:hover .selected { 

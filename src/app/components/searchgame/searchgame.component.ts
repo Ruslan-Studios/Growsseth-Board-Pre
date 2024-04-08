@@ -1,32 +1,52 @@
-import { Component, OnInit } from '@angular/core';
+import axios, { AxiosResponse, AxiosError } from 'axios';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterOutlet } from '@angular/router';
-import { invoke } from "@tauri-apps/api/tauri";
-import { app } from '@tauri-apps/api';
 import { Router } from '@angular/router';
 import { MenuNavComponent } from '../templates/menu-nav/menunav.component';
 import { MenuFooterComponent } from '../templates/menu-footer/menufooter.component';
+import { LobbyComponent } from '../templates/lobby-component/lobby.component';
 
 @Component({
-  selector: 'app-root',
+  selector: 'app-search-game',
+  templateUrl: './searchgame.component.html',
+  styleUrls: ['./searchgame.component.scss'],
   standalone: true,
   imports: [
     CommonModule, 
-    RouterOutlet, 
     MenuNavComponent,
-    MenuFooterComponent
+    MenuFooterComponent,
+    LobbyComponent
   ],
-  templateUrl: './searchgame.component.html',
-  styleUrls: ['./searchgame.component.scss']
 })
 
-export class SearchGameComponent {
+export class SearchGameComponent implements OnInit {
 
-  constructor(private router: Router) {
+  lobbyData: any;
 
+  constructor(private router: Router, private cdr: ChangeDetectorRef) {}
+
+  ngOnInit() {
+    this.fetchLobby();
   }
 
   toMenu() {
     this.router.navigate(['']);
+  }
+
+  joinGame(value:number) {
+    console.log("Game ID:" + value);
+  }
+
+  async fetchLobby() {
+    try {
+      const response = await axios.get('http://127.0.0.1:5000/listLobby');
+
+      const jsonData = JSON.parse(response.data);
+
+      this.lobbyData = jsonData.lobby;
+      console.log(this.lobbyData);
+    } catch (error) {
+      console.error('Error fetching lobby data:', error);
+    }
   }
 }

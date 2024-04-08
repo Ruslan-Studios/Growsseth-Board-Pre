@@ -1,94 +1,32 @@
 <div class="container">
 
-    <nav>
-        <div class="btn-nav">
-            <button (click)="toMenu()"><</button>
-        </div>
-        <p>Searching a Server</p>
-    </nav>
-
-    <div class="undernav"></div>
-    
-    <div class="server-list-container">
-        <div class="server-list-inner">
-            <p class="page-title">Server List</p>
-            <div class="server-display">
-
-
-                <div class="lobby-container">
-                    <div class="lobby-owner">
-                        <img class="lobby-head" src="./../../../assets/imgs/search_lobby/unknown_head.png">
-                        <p>%name%'s Lobby</p>
-                    </div>
-
-                    <p class="lobby-counter">0/3</p>
-
-                </div>
-
-                <div class="lobby-container">
-                    <div class="lobby-owner">
-                        <img src="" alt="">
-                        <p>%name%'s Lobby</p>
-                    </div>
-
-                    <p class="lobby-counter">0/3</p>
-
-                </div>
-
-                <div class="lobby-container">
-                    <div class="lobby-owner">
-                        <img src="" alt="">
-                        <p>%name%'s Lobby</p>
-                    </div>
-
-                    <p class="lobby-counter">0/3</p>
-
-                </div>
-
-                <div class="lobby-container">
-                    <div class="lobby-owner">
-                        <img src="" alt="">
-                        <p>%name%'s Lobby</p>
-                    </div>
-
-                    <p class="lobby-counter">0/3</p>
-
-                </div>
-
-                <div class="lobby-container">
-                    <div class="lobby-owner">
-                        <img src="" alt="">
-                        <p>%name%'s Lobby</p>
-                    </div>
-
-                    <p class="lobby-counter">0/3</p>
-
-                </div>
-
-                <div class="lobby-container">
-                    <div class="lobby-owner">
-                        <img src="" alt="">
-                        <p>%name%'s Lobby</p>
-                    </div>
-
-                    <p class="lobby-counter">0/3</p>
-
-                </div>
-
-                <div class="lobby-container">
-                    <div class="lobby-owner">
-                        <img src="" alt="">
-                        <p>%name%'s Lobby</p>
-                    </div>
-
-                    <p class="lobby-counter">0/3</p>
-
-                </div>
-
-
-            </div>
-        </div>
+  <nav>
+    <div class="btn-nav">
+      <button (click)="toMenu()"><</button>
     </div>
+    <p>Searching a Server</p>
+  </nav>
 
-    <app-menu-footer></app-menu-footer>
+  <div class="undernav"></div>
+  
+  <div class="server-list-container">
+
+    <div class="server-list-inner">
+      <div class="server-title">
+        <div></div>
+        <p class="page-title">Server List</p>
+        <button>
+          U
+        </button>
+      </div>
+      <div class="server-display" *ngIf="lobbyData; else noLobby">
+        <app-lobby-item *ngFor="let lobby of lobbyData"  [playerName]="lobby.lobby_name" [playerCount]="lobby.users.length" (click)="joinGame(lobby.game_id)" class="lobby-item"></app-lobby-item>
+      </div>
+      <ng-template #noLobby>
+        <p style="text-align: center; color: white;">There is no lobby active.</p>
+      </ng-template>
+    </div>
+  </div>
+
+  <app-menu-footer></app-menu-footer>
 </div>
