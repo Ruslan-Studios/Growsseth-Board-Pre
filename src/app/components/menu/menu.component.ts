@@ -22,7 +22,6 @@ import { MenuFooterComponent } from '../templates/menu-footer/menufooter.compone
 
 export class MenuComponent
 {
-
   constructor(private router: Router) {
 
   }
@@ -39,4 +38,7 @@ export class MenuComponent
     this.router.navigate(['searchRandom']);
   }
 
+  to3D() {
+    this.router.navigate(['threeScene']);
+  }
 }

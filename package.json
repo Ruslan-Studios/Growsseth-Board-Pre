@@ -19,15 +19,17 @@
     "@angular/platform-browser-dynamic": "^17.0.0",
     "@angular/router": "^17.0.0",
     "@tauri-apps/api": "^1",
+    "@types/three": "^0.163.0",
     "axios": "^1.6.8",
     "rxjs": "~7.8.0",
     "sass": "^1.72.0",
+    "three": "^0.163.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.14.2"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^17.0.0",
-    "@angular/cli": "^17.0.0",
+    "@angular/cli": "^17.3.3",
     "@angular/compiler-cli": "^17.0.0",
     "@tauri-apps/cli": "^1",
     "@types/jasmine": "~5.1.0",
