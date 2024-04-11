@@ -44,7 +44,6 @@ export class SearchGameComponent implements OnInit {
       const jsonData = JSON.parse(response.data);
 
       this.lobbyData = jsonData.lobby;
-      console.log(this.lobbyData);
     } catch (error) {
       console.error('Error fetching lobby data:', error);
     }

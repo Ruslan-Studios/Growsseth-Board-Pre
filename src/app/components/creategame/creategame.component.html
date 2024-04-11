@@ -1,3 +1,11 @@
 <div class="content">
-    <p>crea palle</p>
+    <nav>
+        <div class="btn-nav">
+          <button (click)="toMenu()"><</button>
+        </div>
+        <p>Creating a Room</p>
+    </nav>
+
+    <input type="text" placeholder="Set name..." #playerNameInput>
+    <button (click)="createRoom()">Create Room</button>
 </div>
