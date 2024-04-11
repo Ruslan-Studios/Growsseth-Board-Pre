@@ -23,7 +23,6 @@ import { primaryMonitor } from '@tauri-apps/api/window';
 
 export class OptionsComponent
 {
-
   standardResolutions: number[][] = [
     [720, 512],
     [1080, 768],
@@ -55,5 +54,4 @@ export class OptionsComponent
   toMenu() {
     this.router.navigate(['']);
   }
-
 }

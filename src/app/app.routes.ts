@@ -4,11 +4,13 @@ import { CreateGameComponent } from "./components/creategame/creategame.componen
 import { OptionsComponent } from "./components/options/options.component";
 import { SearchGameComponent } from "./components/searchgame/searchgame.component";
 import { JoinRandomComponent } from "./components/joinrandom/joinrandom.component";
+import { MainmenuComponent } from "./components/mainmenu/mainmenu.component";
 
 export const routes: Routes = [
     {path: '', component: MenuComponent},
     {path: 'options', component: OptionsComponent},
     {path: 'createGame', component: CreateGameComponent},
     {path: 'searchGame', component: SearchGameComponent},
-    {path: 'searchRandom', component: JoinRandomComponent}
+    {path: 'searchRandom', component: JoinRandomComponent},
+    {path: 'threeScene', component: MainmenuComponent}
 ];
