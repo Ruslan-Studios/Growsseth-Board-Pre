@@ -5,6 +5,7 @@ import { invoke } from "@tauri-apps/api/tauri";
 import { app } from '@tauri-apps/api';
 import { Router } from '@angular/router';
 import axios from 'axios';
+import { appWindow } from '@tauri-apps/api/window'
 
 @Component({
   selector: 'app-root',
@@ -12,6 +13,7 @@ import axios from 'axios';
   imports: [CommonModule, RouterOutlet],
   templateUrl: './creategame.component.html'
 })
+
 
 export class CreateGameComponent implements OnInit {
 
@@ -21,8 +23,8 @@ export class CreateGameComponent implements OnInit {
     
   }
 
-  constructor(private router: Router ) {
-
+  constructor(private router: Router) {
+    
   }
 
   toMenu() {
@@ -37,23 +39,15 @@ export class CreateGameComponent implements OnInit {
         throw new Error("Input field empty");
       }
 
-      let api_key = null;
-      let ip = null;
+      const unlisten = await appWindow.listen<string>('message_from_server', (event) => {
+        console.log(event.payload);
+        invoke('send_message', { message: "clientLog§messageReceived" });
+      });
+      
+      await invoke('start_listening');
 
-      await Promise.all([
-        invoke("retrieve_env").then((message) => {
-          api_key = message;
-        }),
-        invoke("retrieve_ip").then((message) => {
-          ip = message;
-        })
-      ]);
-
-      if(api_key != null)
-      {
-        const response = await axios.get('http://127.0.0.1:5000/createLobby/' + api_key + "/" + ip + "/" + name);
-        console.log(response);
-      }
+      //this.webSocketService.connect();
+      
     } catch (error) {
       console.error('Error fetching lobby data:', error);
     }
