@@ -7,6 +7,14 @@ import { Router } from '@angular/router';
 import axios from 'axios';
 import { appWindow } from '@tauri-apps/api/window'
 
+class ClientData {
+  constructor(
+    public name?: string | null,
+    public serverId?: string | null,
+    public lobbyId?: string | null
+  ) {}
+}
+
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -14,22 +22,92 @@ import { appWindow } from '@tauri-apps/api/window'
   templateUrl: './creategame.component.html'
 })
 
-
 export class CreateGameComponent implements OnInit {
 
   @ViewChild('playerNameInput') playerName!: ElementRef;
+  clientData_: ClientData = new ClientData();
 
+  actionHandlers: Record<string, (data?: string) => void> = {
+    "serverConnectionSuccessfull": (data) => {
+      this.clientData_.serverId = data !== undefined ? String(data) : null;
+      // Here, clientSocket is not defined, so I'm assuming it's handled elsewhere
+      // Adjust this line according to your needs
+      // clientSocket.write("setName§" + this.clientData.serverId + "§" + this.clientData.name);
+    },
+    "serverLog": (data) => {
+      console.log("Server << " + data);
+    },
+    "serverFull": () => { 
+      console.error("Error: Server Full -> Disconnected");
+      process.exit(0); 
+    },
+    "setServerId": (data) => {
+      this.clientData_.serverId = data !== undefined ? String(data) : null;
+    },
+    "lobbyJoined": (data) => {
+      this.clientData_.lobbyId = data !== undefined ? String(data) : null;
+    },
+    "lobbyCreated": (data) => {
+      this.clientData_.lobbyId = data !== undefined ? String(data) : null;
+      console.log("Client >> Lobby created and joined");
+    },
+    "error": (data) => {
+      console.log("Server >> " + data)
+    }
+  };
+  
   ngOnInit() {
     
   }
 
-  constructor(private router: Router) {
+  async startConnection() {
+    console.log("Starting");
+
+
+    const unlisten = await appWindow.listen<string>('message_from_server', (event) => {
+      console.log(event);
+      const [action, datas] = event.payload.toString().split('§', 2);
+      this.process_action(action, datas);
+      invoke('send_message', { message: "clientLog§Client Connesso"});
+    });
     
+    try {
+      let i: any = invoke('start_listening');
+      i.then((value: any) => {
+          if(value != null)
+          {
+            this.router.navigate(['']);
+          }
+      });
+    } catch (error) {
+      // Handle the error here
+      console.error('An error occurred:', error);
+    }
+  }
+
+  process_action(action: string, data?: string) {
+    const handler = this.actionHandlers[action];
+    if (handler) {
+      try {
+        handler(data);
+        console.log(`Action processed: ${action}${data ? ', data: ' + data : ''}`);
+      } catch {
+        console.error(`Error executing action: ${action}`);
+      }
+    } else {
+      console.error(`Action not handled: ${action}`);
+    }
+  }
+
+  constructor(private router: Router) {
+    this.startConnection();
   }
 
   toMenu() {
     this.router.navigate(['']);
   }
+
+
 
   async createRoom() {
     try {
@@ -39,12 +117,9 @@ export class CreateGameComponent implements OnInit {
         throw new Error("Input field empty");
       }
 
-      const unlisten = await appWindow.listen<string>('message_from_server', (event) => {
-        console.log(event.payload);
-        invoke('send_message', { message: "clientLog§messageReceived" });
-      });
-      
-      await invoke('start_listening');
+      this.clientData_.name = name;
+
+      invoke('send_message', { message: "setName§" + this.clientData_.serverId + "§" + this.clientData_.name });
 
       //this.webSocketService.connect();
       

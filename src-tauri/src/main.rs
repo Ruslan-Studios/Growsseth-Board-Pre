@@ -22,7 +22,14 @@ async fn send_message(message: String) -> Result<(), String> {
         Ok(s) => s,
         Err(e) => return Err(e.to_string()),
     };
-    stream.write_all(message.as_bytes()).await;
+
+    if let Err(e) = stream.write_all(message.as_bytes()).await {
+        return Err(e.to_string());
+    }
+
+    // Explicitly close the connection by dropping the stream
+    drop(stream);
+
     Ok(())
 }
 
@@ -30,19 +37,20 @@ async fn send_message(message: String) -> Result<(), String> {
 async fn start_listening(window: tauri::Window) -> Result<(), String> {
     let mut stream = match TcpStream::connect("127.0.0.1:1105").await {
         Ok(s) => s,
-        Err(e) => return Err(e.to_string()),
+        Err(e) => { return Err("Impossibile Connettere".to_string())},
     };
 
     tokio::spawn(async move {
         let mut buffer = [0; 1024];
         loop {
+            //println!("Test");
             match stream.read(&mut buffer).await {
                 Ok(n) if n == 0 => {
                     println!("Connection was closed by the server.");
-                    break;
                 },
                 Ok(n) => {
                     let msg = String::from_utf8_lossy(&buffer[..n]).to_string();
+                    println!("{}", msg);
                     if window.emit("message_from_server", &msg).is_err() {
                         eprintln!("Failed to send event");
                     }
