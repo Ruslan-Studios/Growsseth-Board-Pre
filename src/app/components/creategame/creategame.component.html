@@ -1,3 +1,14 @@
 <div class="content">
-    <p>crea palle</p>
+    <nav>
+        <div class="btn-nav">
+          <button (click)="toMenu()"><</button>
+        </div>
+        <p>Creating a Room</p>
+    </nav>
+
+    <input type="text" placeholder="Set name..." #playerNameInput>
+    <input type="text" placeholder="Room name..." #roomNameInput>
+    <input type="checkbox" name="" #roomHasPassword>
+    <input type="text" placeholder="Room name..." #roomPassInput>
+    <button (click)="createRoom()">Create Room</button>
 </div>
