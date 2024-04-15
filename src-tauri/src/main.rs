@@ -47,6 +47,7 @@ async fn start_listening(window: tauri::Window) -> Result<(), String> {
             match stream.read(&mut buffer).await {
                 Ok(n) if n == 0 => {
                     println!("Connection was closed by the server.");
+                    break;
                 },
                 Ok(n) => {
                     let msg = String::from_utf8_lossy(&buffer[..n]).to_string();

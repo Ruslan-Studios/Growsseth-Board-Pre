@@ -6,6 +6,7 @@ import { app } from '@tauri-apps/api';
 import { Router } from '@angular/router';
 import axios from 'axios';
 import { appWindow } from '@tauri-apps/api/window'
+import { message } from '@tauri-apps/api/dialog';
 
 class ClientData {
   constructor(
@@ -25,6 +26,10 @@ class ClientData {
 export class CreateGameComponent implements OnInit {
 
   @ViewChild('playerNameInput') playerName!: ElementRef;
+  @ViewChild('roomNameInput') roomName!: ElementRef;
+  @ViewChild('roomHasPassword') hasPass!: ElementRef;
+  @ViewChild('roomPassInput') passInput!: ElementRef;
+
   clientData_: ClientData = new ClientData();
 
   actionHandlers: Record<string, (data?: string) => void> = {
@@ -112,14 +117,31 @@ export class CreateGameComponent implements OnInit {
   async createRoom() {
     try {
       let name = this.playerName.nativeElement.value;
-      if(name == "")
+      let roomName = this.roomName.nativeElement.value;
+      let passOn = this.hasPass.nativeElement.value;
+      let password = this.passInput.nativeElement.value;
+
+      if(passOn == "On")
+        passOn = '1'
+      else
+        passOn = '0'
+      
+      if(name == "" || roomName == "")
       {
         throw new Error("Input field empty");
+      }
+
+      if(passOn == '1' && password != "") {
+        throw new Error("Password set but input empty");
       }
 
       this.clientData_.name = name;
 
       invoke('send_message', { message: "setName§" + this.clientData_.serverId + "§" + this.clientData_.name });
+      if(passOn == '1')
+        invoke('send_message', { message: "createLobby§" + this.clientData_.serverId + "§" + roomName + "§" + passOn + "§" + password});
+      else
+        invoke('send_message', { message: "createLobby§" + this.clientData_.serverId + "§" + roomName + "§" + passOn});
 
       //this.webSocketService.connect();
       
