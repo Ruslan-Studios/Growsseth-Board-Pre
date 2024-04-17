@@ -1,4 +1,4 @@
-import { Component, ViewChild, ElementRef } from '@angular/core';
+import { Component, ViewChild, ElementRef, OnInit, AfterViewInit, Input } from '@angular/core';
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
@@ -11,61 +11,125 @@ import { RGBELoader } from 'three/examples/jsm/loaders/RGBELoader.js';
   templateUrl: './mainmenu.component.html',
   styleUrl: './mainmenu.component.scss'
 })
-export class MainmenuComponent
+export class MainmenuComponent implements OnInit, AfterViewInit
 {
   @ViewChild('rendererContainer')
-  rendererContainer!: ElementRef;
+  private rendererCanvas!: ElementRef;
 
-    renderer = new THREE.WebGLRenderer();
-    scene = new THREE.Scene();
+  private renderer!: THREE.WebGLRenderer;
+
+  private scene!: THREE.Scene;
+
+  // CAMERA
+  @Input() public cameraY: number = 15;
+  @Input() public cameraXRot: number = (90 / 180) * Math.PI;
+  @Input() public FOV: number = 75;
+  @Input('nearClip') public nearClippingPlane: number = 0.1;
+  @Input('farClip') public farClippingPlane: number = 1000;
+
+  private camera!: THREE.PerspectiveCamera;
+  private orbit!: OrbitControls;
+
+  // LUCI
+  //directionalLight = new THREE.DirectionalLight(0xFFFFFF, 5.0);
+  private ambientLight!: THREE.AmbientLight;
+
+  // IMPORTAZIONE MODELLI 3D
+  // - Loader
+  gltfLoader = new GLTFLoader(); // Modelli
+  rgbeLoader = new RGBELoader(); // HDRI
+  // - Modelli
+  bookModel: any; // Quale cazzo è il tipo del modello? GLTF non me lo fa mettere boh
+  
+  // HELPER
+  axesHelper = new THREE.AxesHelper;
+  gridHelper = new THREE.GridHelper(30, 50);
+  //dLightHelper = new THREE.DirectionalLightHelper(this.directionalLight, 5);
+
+  private getAspectRatio(): number
+  {
+    return window.innerWidth / window.innerHeight;
+  }
+
+  private createScene()
+  {
+    console.log("Creando scena");
+
+    // Scena
+    this.scene = new THREE.Scene();
+    // this.scene.background = new THREE.Color(0x000000);
     
-    camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-    orbit = new OrbitControls(this.camera, this.renderer.domElement);
+    // Camera
+    let aspectRatio = this.getAspectRatio();
 
-    gltfLoader = new GLTFLoader();
+    this.camera = new THREE.PerspectiveCamera
+    (
+      this.FOV,
+      aspectRatio,
+      this.nearClippingPlane,
+      this.farClippingPlane
+    );
+    this.camera.position.y = this.cameraY;
+    this.camera.rotation.x = this.cameraXRot;
 
-    directionalLight = new THREE.DirectionalLight(0xFFFFFF, 5.0);
-    dLightHelper = new THREE.DirectionalLightHelper(this.directionalLight, 5);
+    // Luci
+    this.ambientLight = new THREE.AmbientLight(0xFFFFFF);
+    this.scene.add(this.ambientLight);
 
-    axesHelper = new THREE.AxesHelper;
-    gridHelper = new THREE.GridHelper(30, 50);
+    // Helper
+    this.scene.add(this.axesHelper);
+    this.scene.add(this.gridHelper);
 
-    mesh: THREE.Mesh;
+    // Init modelli e texture
+    this.gltfLoader.load('../../../assets/models/book/OurBook.gltf', (book) =>
+      {
+        this.scene.add(book.scene);
+        this.bookModel = book;
+      },
+      (xhr) =>
+      {
+        console.log((xhr.loaded / xhr.total * 100) + '% loaded');
+      },
+      (error) =>
+      {
+        console.error('Errore nel caricamento del modello: ', error);
+      }
+    );
+  }
 
-    constructor()
+  private startRenderingLoop()
+  {
+    console.log("Startando rendering loop");
+    this.renderer = new THREE.WebGLRenderer({canvas: this.rendererCanvas.nativeElement});
+    this.renderer.setPixelRatio(devicePixelRatio);
+    this.renderer.setSize(window.innerWidth, window.innerHeight);
+
+    let component: MainmenuComponent = this;
+
+    // this.orbit = new OrbitControls(this.camera, this.renderer.domElement);
+    this.camera.lookAt(0, 0, 0);
+
+    function render()
     {
-      // this.gltfLoader.load
+      console.log("madonna troia ti renderizzo tutto");
 
-      this.renderer.setSize(window.innerWidth, window.innerHeight);
-
-      this.camera.position.set(20, 0, 0);
-
-      let geometry = new THREE.BoxGeometry(10, 10, 10);
-      let material = new THREE.MeshStandardMaterial({color: 0xff0000});
-      this.mesh = new THREE.Mesh(geometry, material);
-
-      this.scene.add(this.mesh);
-
-      this.directionalLight.position.set(0, 15, 0);
-      this.scene.add(this.directionalLight);
-      this.scene.add(this.dLightHelper);
-
-      this.scene.add(this.axesHelper);
-      this.scene.add(this.gridHelper);
+      requestAnimationFrame(render);
+      component.renderer.render(component.scene, component.camera);
     }
 
-    ngAfterViewInit()
-    {
-      this.renderer.render(this.scene, this.camera);
-      this.rendererContainer.nativeElement.appendChild(this.renderer.domElement);
-      this.animate();
-    }
+    render();
+  }
 
-    animate()
-    {
-        window.requestAnimationFrame(() => this.animate())
-        this.mesh.rotation.x += 0.01
-        this.mesh.rotation.y += 0.02
-        this.renderer.render(this.scene, this.camera)
-    }
+  ngOnInit(): void
+  {
+    console.log("sivalletto?");
+  }
+
+  ngAfterViewInit(): void
+  {
+    console.log("de, pefforza");
+
+    this.createScene();
+    this.startRenderingLoop();
+  }
 }
