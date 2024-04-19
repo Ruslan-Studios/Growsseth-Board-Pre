@@ -31,6 +31,7 @@ export class CreateGameComponent implements OnInit {
   @ViewChild('roomPassInput') passInput!: ElementRef;
 
   clientData_: ClientData = new ClientData();
+  unlisten:any = null;
 
   actionHandlers: Record<string, (data?: string) => void> = {
     "serverConnectionSuccessfull": (data) => {
@@ -44,7 +45,7 @@ export class CreateGameComponent implements OnInit {
     },
     "serverFull": () => { 
       console.error("Error: Server Full -> Disconnected");
-      process.exit(0); 
+      this.router.navigate(['']);
     },
     "setServerId": (data) => {
       this.clientData_.serverId = data !== undefined ? String(data) : null;
@@ -55,6 +56,14 @@ export class CreateGameComponent implements OnInit {
     "lobbyCreated": (data) => {
       this.clientData_.lobbyId = data !== undefined ? String(data) : null;
       console.log("Client >> Lobby created and joined");
+      
+      const navigationExtras = {
+        state: {
+          clientData: this.clientData_
+        }
+      };
+      this.unlisten();
+      this.router.navigate(['lobbyRoom'], navigationExtras);
     },
     "error": (data) => {
       console.log("Server >> " + data)
@@ -69,7 +78,7 @@ export class CreateGameComponent implements OnInit {
     console.log("Starting");
 
 
-    const unlisten = await appWindow.listen<string>('message_from_server', (event) => {
+    this.unlisten = await appWindow.listen<string>('message_from_server', (event) => {
       console.log(event);
       const [action, datas] = event.payload.toString().split('§', 2);
       this.process_action(action, datas);
@@ -77,13 +86,13 @@ export class CreateGameComponent implements OnInit {
     });
     
     try {
-      let i: any = invoke('start_listening');
-      i.then((value: any) => {
-          if(value != null)
-          {
-            this.router.navigate(['']);
-          }
-      });
+      invoke('start_listening')
+      .then((e) => {
+        console.log(e);
+      })
+      .catch((e => {
+        this.router.navigate(['']);
+      }));
     } catch (error) {
       // Handle the error here
       console.error('An error occurred:', error);
@@ -137,13 +146,11 @@ export class CreateGameComponent implements OnInit {
 
       this.clientData_.name = name;
 
-      invoke('send_message', { message: "setName§" + this.clientData_.serverId + "§" + this.clientData_.name });
+      await invoke('send_message', { message: "setName§" + this.clientData_.serverId + "§" + this.clientData_.name });
       if(passOn == '1')
         invoke('send_message', { message: "createLobby§" + this.clientData_.serverId + "§" + roomName + "§" + passOn + "§" + password});
       else
         invoke('send_message', { message: "createLobby§" + this.clientData_.serverId + "§" + roomName + "§" + passOn});
-
-      //this.webSocketService.connect();
       
     } catch (error) {
       console.error('Error fetching lobby data:', error);

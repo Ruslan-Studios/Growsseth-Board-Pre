@@ -1,3 +1,11 @@
 <div class="content">
-    <p>Unisciti ad un lavaggiopalle casuale</p>
+    <nav>
+        <div class="btn-nav">
+          <button (click)="toMenu()"><</button>
+        </div>
+        <p>Random Join</p>
+    </nav>
+
+    <input type="text" placeholder="Set name..." #playerNameInput>
+    <button (click)="randomJoinRoom()">Join a random room</button>
 </div>

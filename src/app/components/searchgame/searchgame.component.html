@@ -19,7 +19,7 @@
           U
         </button>
       </div>
-      <div class="server-display" *ngIf="lobbyData; else noLobby">
+      <div class="server-display" *ngIf="lobbyData.length > 0; else noLobby">
         <app-lobby-item *ngFor="let lobby of lobbyData"  [playerName]="lobby.lobby_name" [playerCount]="lobby.users.length" (click)="joinGame(lobby.game_id)" class="lobby-item"></app-lobby-item>
       </div>
       <ng-template #noLobby>

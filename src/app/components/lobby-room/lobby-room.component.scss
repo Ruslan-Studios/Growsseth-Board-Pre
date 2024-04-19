@@ -1,0 +1,156 @@
+.bg-image {
+    width: 100%;
+    height: 100vh;
+    background-color: black;
+
+    position: absolute;
+    z-index: -1;
+}
+
+.lobby-container {
+    width: 100%;
+    height: 100vh;
+
+    color: white;
+
+    button {
+        width: 166px;
+        height: 61px;
+
+        background-color: #2323236a;
+        border: solid #4A4A4A 5px;
+
+        color: white;
+
+        transition: .15s ease-in-out;
+    }
+
+    button:hover {
+        background-color: #5b5b5b6a;
+        border: solid #3d3d3d 5px;
+    }
+
+    .top-bar {
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+    
+        padding: 93px 0 93px 0;
+    
+        .cyf-text {
+            font-size: 34px;
+        }
+    }
+
+
+    .center {
+        display: flex;
+
+        .playerList {
+            background-color: #20202080;
+            border-top: 2px solid gray;
+            border-bottom: 2px solid gray;
+            border-right: 2px solid gray;
+
+            .player {
+                height: 80px;
+                width: 332px;
+
+                display: flex;
+
+                align-items: center;
+
+                .playerHead {
+                    margin-left: 20px;
+
+                    width: 50px;
+                    height: 50px;
+                    background-color: #D9D9D9;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+
+                    .head {
+                        width: 40px;
+                        height: 40px;
+                    }
+                }
+
+                .playerName {
+                    margin-left: 12px;
+                }
+            }
+
+            
+            .bottomLine {
+                width: 100%;
+                height: 1px;
+                background-color: #89898980;
+            }
+        }
+    }
+
+
+    .bottom-bar {
+
+        position: fixed;
+        width: 100%;
+        height: 264px;
+        bottom: 0;
+
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+
+        #carousel {
+            width: 524px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            .frame {
+                position: absolute;
+
+                transition: .3s ease;
+            }
+
+            .left-frame {
+                width: 167px;
+                height: 105px;
+                background-color: #4A4A4A;
+
+                margin-right: 400px;
+
+                z-index: 1;
+            }
+
+            .current-frame {
+                width: 195px;
+                height: 134px;
+                background-color: #D9D9D9;
+                
+                z-index: 2;
+            }
+
+            .right-frame {
+                width: 167px;
+                height: 105px;
+                background-color: #4A4A4A;
+
+                margin-left: 400px;
+
+                z-index: 1;
+            }
+
+            .last-frame {
+                width: 127px;
+                height: 85px;
+                background-color: #2e2e2e;
+
+                z-index: -1;
+            }
+        }
+    }
+
+}

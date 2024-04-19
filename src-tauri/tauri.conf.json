@@ -7,10 +7,15 @@
   },
   "package": {
     "productName": "Growsseth Board",
-    "version": "0.0.6"
+    "version": "0.8.19"
   },
   "tauri": {
     "allowlist": {
+      "http": {
+        "all": true,
+        "request": true,
+        "scope": ["http://129.152.28.27:5000/*"]
+      },
       "all": false,
       "shell": {
         "all": false,

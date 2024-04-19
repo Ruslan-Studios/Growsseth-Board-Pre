@@ -12,6 +12,7 @@ import { invoke } from "@tauri-apps/api/tauri";
 
 export class AppComponent {
   @HostListener('window:contextmenu', ['$event'])
+  
   onRightClick(event: MouseEvent) {
     event.preventDefault(); // Prevent the browser's default context menu
   }

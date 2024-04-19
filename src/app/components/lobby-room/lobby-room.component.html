@@ -1,0 +1,25 @@
+<div class="bg-image">
+    <img src="" alt="">
+</div>
+
+<div class="lobby-container">
+    <div class="top-bar">
+        <p class="cyf-text">CHOOSE YOUR FACTION</p>
+    </div>
+    <div class="center">
+        <p #Something></p>
+        <div class="playerList" *ngIf="lobbyData.length > 0;">
+            <app-player-item *ngFor="let user of lobbyData" [playerName]="user.name"></app-player-item>
+        </div>
+    </div>
+    <div class="bottom-bar">
+        <button>Settings</button>
+        <div id="carousel">
+            <img src="" alt="" class="left-frame frame">
+            <img src="" alt="" class="current-frame frame">
+            <img src="" alt="" class="right-frame frame">
+            <img src="" alt="" class="last-frame frame">
+        </div>
+        <button>Ready</button>
+    </div>
+</div>

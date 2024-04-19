@@ -41,4 +41,8 @@ export class MenuComponent
   to3D() {
     this.router.navigate(['threeScene']);
   }
+
+  toRoom() {
+    this.router.navigate(['lobbyRoom']);
+  }
 }
